@@ -1,0 +1,13 @@
+.list {
+    max-width: 50%;
+    margin: 2em auto 1em;
+    background-color: #FFEBF2;
+    border-radius: 4px;
+    padding: 0.4em 1em;
+    text-align: left;
+    box-shadow: 0 2px 5px -3px #666;
+}
+
+.message {
+    color: #666;
+}

@@ -1,0 +1,22 @@
+.task-creator-container {
+    display: flex;
+    justify-content: center;
+}
+
+.form-input {
+    padding: 0.5em;
+    border: none;
+    width: 400px;
+    border-radius: 4px;
+    margin-right: 0.5em;
+    box-shadow: 0 2px 5px -3px #666;
+}
+
+.form-button {
+    padding: 10px 30px;
+    background-color: #FF5C98;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    box-shadow: 0 2px 5px -3px #666;
+}
