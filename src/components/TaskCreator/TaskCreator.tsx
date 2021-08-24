@@ -1,20 +1,32 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './TaskCreator.css';
 import { addTask } from '../../actions/TaskActions';
 
-class TaskCreator extends Component {
-    constructor() {
-        super();
+interface TaskCreatorProps {
+
+}
+
+interface TaskCreatorState {
+    text: string
+}
+
+class TaskCreator extends React.Component<TaskCreatorProps, TaskCreatorState> {
+    constructor(props: object) {
+        super(props);
         this.state = {
             text: ''
         };
     };
 
-    onChange = (e) => {
+    onChange = (e: { target: HTMLInputElement; }) => {
         this.setState({ text: e.target.value });
     }
 
     addNewTask = () => {
+        if(this.state.text.length === 0) {
+            return;
+        }
+
         let newTask = {
             id: Math.floor(Math.random() * 100),
             text: this.state.text
@@ -36,7 +48,7 @@ class TaskCreator extends Component {
                     value={this.state.text}
                     onKeyPress={event => event.key === 'Enter' && this.addNewTask()}
                 />
-                <button className="form-button" onClick={this.addNewTask.bind(this)}>Add</button>
+                <button className={`form-button ${this.state.text.length === 0 ? "disabled-btn": ""}`} onClick={this.addNewTask.bind(this)} disabled={this.state.text.length === 0}>Add</button>
             </div>
         )
     }

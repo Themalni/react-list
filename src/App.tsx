@@ -5,7 +5,7 @@ import TaskCreator from './components/TaskCreator/TaskCreator';
 import List from './components/List/List';
 
 class App extends Component {
-  constructor(props) {
+  constructor(props: object) {
     super(props);
 
     this.state = {

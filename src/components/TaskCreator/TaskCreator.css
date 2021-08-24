@@ -20,3 +20,15 @@
     color: #fff;
     box-shadow: 0 2px 5px -3px #666;
 }
+
+.form-button:hover {
+    cursor: pointer;
+}
+
+.disabled-btn {
+    background-color: #aa6f87;
+}
+
+.disabled-btn:hover {
+    cursor: default;
+}

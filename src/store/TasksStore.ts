@@ -1,38 +1,42 @@
 import { EventEmitter } from "events";
 import dispatcher from "../dispatcher";
 
+interface Task {
+    id: number;
+    text: string;
+}
+
+let localTasks: Task[] = JSON.parse(localStorage.getItem("tasks") || '') || [];
+
 class TasksStore extends EventEmitter {
 
     getAllTasks() {
-        const localTasks = localStorage.getItem("tasks") || [];
-        return localTasks.length > 0 ? JSON.parse(localTasks) : localTasks;
+        return localTasks.length > 0 ? JSON.parse(localStorage.getItem("tasks") || '') : [];
     }
 
-    addTask(task) {
-        const localTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    addTask(task: Task) {
         localTasks.push(task);
         localStorage.setItem("tasks", JSON.stringify(localTasks));
 
         this.emit("change");
     }
 
-    deleteTask(id) {
-        const localTasks = JSON.parse(localStorage.getItem('tasks')) || [];
-        const localTaskIndex = localTasks.findIndex(taskId => taskId.id === id);
+    deleteTask(id: number) {
+        const localTaskIndex = localTasks.findIndex((taskId) => taskId.id === id);
         localTasks.splice(localTaskIndex, 1);
         localStorage.setItem("tasks", JSON.stringify(localTasks));
 
         this.emit("change");
     }
 
-    handleActions = (action) => {
-        switch(action.type) {
+    handleActions = (payload) => {
+        switch(payload.type) {
             case "ADD_TASK": {
-                this.addTask(action.task);
+                this.addTask(payload.task);
                 break;
             }
             case "DELETE_TASK": {
-                this.deleteTask(action.id);
+                this.deleteTask(payload.id);
                 break;
             }
             default:

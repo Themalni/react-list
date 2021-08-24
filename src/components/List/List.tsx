@@ -1,11 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './List.css';
 import Task from '../Task/Task';
 import TasksStore from '../../store/TasksStore';
 
-class List extends Component {
-    constructor() {
-        super();
+
+
+interface ListState {
+    tasks: Array<any>
+}
+
+interface ListProps {
+
+}
+
+class List extends React.Component<ListProps, ListState> {
+    constructor(props: object) {
+        super(props);
         this.state = {
             tasks: TasksStore.getAllTasks()
         };
@@ -20,9 +30,8 @@ class List extends Component {
     }
 
     render () {
-
         const TasksComponents = this.state.tasks.map((task) => {
-            return <Task key={task.id}  task={task} />
+            return <Task key={task.id}  text={task.text} id={task.id}/>
         })
 
         return (
